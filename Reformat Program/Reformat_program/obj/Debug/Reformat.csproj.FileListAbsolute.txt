@@ -1,0 +1,9 @@
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\bin\Debug\Reformat.exe.config
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\bin\Debug\Reformat.exe
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\bin\Debug\Reformat.pdb
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat_program.frmMain.resources
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.Properties.Resources.resources
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.csproj.GenerateResource.cache
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.exe
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.pdb
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.csprojAssemblyReference.cache
