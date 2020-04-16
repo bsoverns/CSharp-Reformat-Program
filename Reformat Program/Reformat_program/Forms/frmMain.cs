@@ -65,6 +65,7 @@ namespace Reformat_program
             cmbOptions.Items.Add("Base64 Decrypt");
             cmbOptions.Items.Add("AES-256 Encrypt");
             cmbOptions.Items.Add("AES-256 Decrypt");
+            cmbOptions.Items.Add("SQL Reformat");
             cmbOptions.SelectedItem = "Add Commas";
             //Mail_message();  
 
@@ -77,7 +78,21 @@ namespace Reformat_program
             try
             {
                 //MessageBox.Show(cmbOptions.SelectedItem.ToString());
-                if (cmbOptions.SelectedItem.ToString() == "Add Commas")
+                if (cmbOptions.SelectedItem.ToString() == "SQL Reformat")
+                {
+
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("	", "");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\r\n,", " ,");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\r,", " ,");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\n,", " ,");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\r\non", " on");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\ron", " on");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\non", " on");
+
+                }
+
+                else if(cmbOptions.SelectedItem.ToString() == "Add Commas")
                 {
                     richTextBox2.Clear();
                     richTextBox2.Text = richTextBox1.Text.Replace("\n", ",\n");
