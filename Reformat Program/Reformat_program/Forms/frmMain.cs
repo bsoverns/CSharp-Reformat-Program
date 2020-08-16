@@ -5,8 +5,7 @@
  *                Some processes no longer work because I disabled them.  Emailed alerts no longer work because Google blocked them and they are anoying anyway.  
  *                I left them in so anyone can see how it works.
  *    Created On:
- * Last Modified: 2020-03-12
- *    How to use: type in a variable name, hit enter, repeat.  835/837 files use ~ as a split.
+ * Last Modified: 2020-03-12 How to use: type in a variable name, hit enter, repeat.  835/837 files use ~ as a split.
  * 
  */
 
@@ -40,6 +39,7 @@ namespace Reformat_program
         public frmMain()
         {
             InitializeComponent();
+            cmbOptions.Items.Add("SQL Reformat");
             cmbOptions.Items.Add("Add Commas");
             cmbOptions.Items.Add("Add Commas - Flat");
             cmbOptions.Items.Add("Ticks");
@@ -65,8 +65,9 @@ namespace Reformat_program
             cmbOptions.Items.Add("Base64 Decrypt");
             cmbOptions.Items.Add("AES-256 Encrypt");
             cmbOptions.Items.Add("AES-256 Decrypt");
-            cmbOptions.Items.Add("SQL Reformat");
-            cmbOptions.SelectedItem = "Add Commas";
+            cmbOptions.Items.Add("MSH Reformat");
+            cmbOptions.Items.Add("Replace Feeds");
+            cmbOptions.SelectedItem = "SQL Reformat";
             //Mail_message();  
 
             //Comment out below to remove sample data
@@ -77,22 +78,42 @@ namespace Reformat_program
         {
             try
             {
-                //MessageBox.Show(cmbOptions.SelectedItem.ToString());
+                //MessageBox.Show(cmbOptions.SelectedItem.ToString());                
                 if (cmbOptions.SelectedItem.ToString() == "SQL Reformat")
                 {
+                    string[] separatingStrings = { "," };
+
+                    string oldText = richTextBox1.Text;
+                    string newText = "";
+
+                    string[] words = oldText.Split(separatingStrings, System.StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (var word in words)
+                    {
+                        if (newText.Length.Equals(0))
+                        {
+                            newText = word.Trim();
+                        }
+                        else
+                        {
+                            newText = newText + ", " + word.Trim();
+                        }
+                    }
 
                     richTextBox2.Clear();
-                    richTextBox2.Text = richTextBox1.Text.Replace("	", "");
-                    richTextBox2.Text = richTextBox2.Text.Replace("\r\n,", " ,");
-                    richTextBox2.Text = richTextBox2.Text.Replace("\r,", " ,");
-                    richTextBox2.Text = richTextBox2.Text.Replace("\n,", " ,");
+                    richTextBox2.Text = newText;//richTextBox1.Text.Replace("	", "");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\r\n,", ", ");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\r,", ", ");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\n,", ", ");
                     richTextBox2.Text = richTextBox2.Text.Replace("\r\non", " on");
                     richTextBox2.Text = richTextBox2.Text.Replace("\ron", " on");
                     richTextBox2.Text = richTextBox2.Text.Replace("\non", " on");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\r", "");
+                    richTextBox2.Text = richTextBox2.Text.Replace("\n", "");
 
                 }
 
-                else if(cmbOptions.SelectedItem.ToString() == "Add Commas")
+                else if (cmbOptions.SelectedItem.ToString() == "Add Commas")
                 {
                     richTextBox2.Clear();
                     richTextBox2.Text = richTextBox1.Text.Replace("\n", ",\n");
@@ -107,25 +128,25 @@ namespace Reformat_program
                 else if (cmbOptions.SelectedItem.ToString() == "Ticks")
                 {
                     richTextBox2.Clear();
-                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "\',\n\'");
+                    richTextBox2.Text = @"'" + richTextBox1.Text.Replace("\n", "\',\n\'") + @"'";
                 }
 
                 else if (cmbOptions.SelectedItem.ToString() == "Ticks - Flat")
                 {
                     richTextBox2.Clear();
-                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "\', \'");
+                    richTextBox2.Text = @"'" + richTextBox1.Text.Replace("\n", "\', \'") + @"'";
                 }
 
                 else if (cmbOptions.SelectedItem.ToString() == "Quotes")
                 {
                     richTextBox2.Clear();
-                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "\",\n\"");
+                    richTextBox2.Text = "\"" + richTextBox1.Text.Replace("\n", "\",\n\"") + "\"";
                 }
 
                 else if (cmbOptions.SelectedItem.ToString() == "Quotes - Flat")
                 {
                     richTextBox2.Clear();
-                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "\", \"");
+                    richTextBox2.Text = "\"" + richTextBox1.Text.Replace("\n", "\", \"") + "\"";
                 }
 
                 else if (cmbOptions.SelectedItem.ToString() == "QUOTENAME([column_name], '\"')")
@@ -207,14 +228,14 @@ namespace Reformat_program
                     richTextBox2.Clear();
                     richTextBox2.Text = richTextBox1.Text.Replace("\n", " " + character + "\" + \n\"");
                 }
-                
+
                 else if (cmbOptions.SelectedItem.ToString() == "CopySQLtoJavaScript")
                 {
                     string character = @"\n";
                     richTextBox2.Clear();
                     richTextBox2.Text = richTextBox1.Text.Replace("\n", "\" + \n\"");
                 }
-                                
+
                 else if (cmbOptions.SelectedItem.ToString() == "Json Split Variables")
                 {
                     string[] lines = richTextBox1.Text.Replace(" ", "").Split(new string[] { "\r\n", "," }, StringSplitOptions.None);
@@ -226,7 +247,7 @@ namespace Reformat_program
 
                         if (richTextBox2.Text == "")
                         {
-                            richTextBox2.Text = item[0].ToString().Replace("\"","").Trim();
+                            richTextBox2.Text = item[0].ToString().Replace("\"", "").Trim();
                         }
 
                         else
@@ -251,8 +272,8 @@ namespace Reformat_program
                         richTextBox2.Text = (richTextBox2.Text + "[JsonProperty(\"" + line.ToString() + "\")]\npublic string " + line.ToString() + " { get; set; }" + "\r\n\r\n");
                         //richTextBox2.Text = richTextBox1.Text.Replace("\n", ",\n");
 
-                     //[JsonProperty("regularMarketTime")]
-                     //public string regularMarketTime { get; set; } //"regularMarketTime": 1582318848,    
+                        //[JsonProperty("regularMarketTime")]
+                        //public string regularMarketTime { get; set; } //"regularMarketTime": 1582318848,    
                     }
                 }
 
@@ -269,7 +290,7 @@ namespace Reformat_program
                 }
 
                 else if (cmbOptions.SelectedItem.ToString() == "Mirth deliminator")
-                {                    
+                {
                     string ending = @"') + delimiter + results.getString('";
                     richTextBox2.Clear();
                     richTextBox2.Text = richTextBox1.Text.Replace("\n", ending);
@@ -281,9 +302,9 @@ namespace Reformat_program
                     richTextBox2.Clear();
                     richTextBox2.Text = richTextBox1.Text.Replace("\n", ending);
                 }
-                    
+
                 else if (cmbOptions.SelectedItem.ToString() == "Base64 Encrypt")
-                {                                       
+                {
                     richTextBox2.Clear();
                     richTextBox2.Text = ToBase64UNICODE(richTextBox1.Text);
                 }
@@ -301,7 +322,7 @@ namespace Reformat_program
                     {
                         password = password + Key.Substring(password.Length);
                         richTextBox2.Clear();
-                        richTextBox2.Text = EncryptionClass.Encrypt(richTextBox1.Text, password, IV);                        
+                        richTextBox2.Text = EncryptionClass.Encrypt(richTextBox1.Text, password, IV);
                     }
 
                     else
@@ -324,11 +345,32 @@ namespace Reformat_program
                     {
                         MessageBox.Show("The password is too long.  It must be less than 32 characters.");
                     }
-                }                
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "MSH Reformat")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("MSH", "~~~MSH");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Replace Feeds")
+                {
+                    RichTextBox tempBox1 = new RichTextBox();
+                    RichTextBox tempBox2 = new RichTextBox();
+                    RichTextBox tempBox3 = new RichTextBox();
+
+                    richTextBox2.Clear();
+                    tempBox1.Text = richTextBox1.Text.Replace("\r\n", "");
+                    tempBox2.Text = tempBox1.Text.Replace("\r", "").Replace("\n", "");
+                    tempBox3.Text = tempBox2.Text.Replace("~~~MSH", "\r\nMSH");
+                    richTextBox2.Text = tempBox3.Text;
+                    //richTextBox2.Text.Replace("\r\n", "");
+                }               
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Hmmmm.  It doesn't work.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Contact Brad", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
