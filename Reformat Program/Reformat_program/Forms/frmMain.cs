@@ -233,7 +233,8 @@ namespace Reformat_program
                 {
                     string character = @"\n";
                     richTextBox2.Clear();
-                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "\" + \n\"");
+                    //richTextBox2.Text = richTextBox1.Text.Replace("\n", "\" + \n\"");
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", " \" \n+ \"\\r\\n");
                 }
 
                 else if (cmbOptions.SelectedItem.ToString() == "Json Split Variables")
