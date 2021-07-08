@@ -7,3 +7,4 @@ C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\R
 C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.exe
 C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.pdb
 C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.csprojAssemblyReference.cache
+C:\Sandbox\Reformat-Program-github\Reformat Program\Reformat_program\obj\Debug\Reformat.csproj.CoreCompileInputs.cache
