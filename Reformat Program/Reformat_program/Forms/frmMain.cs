@@ -5,7 +5,7 @@
  *                Some processes no longer work because I disabled them.  Emailed alerts no longer work because Google blocked them and they are anoying anyway.  
  *                I left them in so anyone can see how it works.
  *    Created On:
- * Last Modified: 2020-03-12 How to use: type in a variable name, hit enter, repeat.  835/837 files use ~ as a split.
+ * Last Modified: 2021-07-08 How to use: type in a variable name, hit enter, repeat.  835/837 files use ~ as a split.
  * 
  */
 
