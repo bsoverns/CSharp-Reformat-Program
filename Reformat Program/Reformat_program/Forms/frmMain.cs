@@ -71,7 +71,7 @@ namespace Reformat_program
             //Mail_message();  
 
             //Comment out below to remove sample data
-            richTextBox1.Text = "last_name\r\nfirst_name\r\ndate_of_birth\r\naddress_line_1";
+            //richTextBox1.Text = "last_name\r\nfirst_name\r\ndate_of_birth\r\naddress_line_1";
         }
 
         private void button1_Click(object sender, EventArgs e)
