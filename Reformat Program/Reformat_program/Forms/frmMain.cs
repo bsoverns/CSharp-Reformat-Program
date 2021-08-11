@@ -27,6 +27,8 @@ using System.IO;
 using Microsoft.Win32;
 using System.Threading;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace Reformat_program
 {
@@ -44,6 +46,8 @@ namespace Reformat_program
             cmbOptions.Items.Add("Add Commas - Flat");
             cmbOptions.Items.Add("Ticks");
             cmbOptions.Items.Add("Ticks - Flat");
+            cmbOptions.Items.Add("JSON Beautify");
+            cmbOptions.Items.Add("JSON Shrink");
             cmbOptions.Items.Add("Quotes");
             cmbOptions.Items.Add("Quotes - Flat");
             cmbOptions.Items.Add("QUOTENAME([column_name], '\"')");
@@ -366,7 +370,23 @@ namespace Reformat_program
                     tempBox3.Text = tempBox2.Text.Replace("~~~MSH", "\r\nMSH");
                     richTextBox2.Text = tempBox3.Text;
                     //richTextBox2.Text.Replace("\r\n", "");
-                }               
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "JSON Beautify")
+                {
+                    var jsonObject = JsonConvert.DeserializeObject<dynamic>(richTextBox1.Text);
+
+                    richTextBox2.Clear();
+                    richTextBox2.Text = jsonObject.ToString();
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "JSON Shrink")
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+
+                    richTextBox2.Clear();
+                    richTextBox2.Text = Regex.Replace(richTextBox1.Text, "(\"(?:[^\"\\\\]|\\\\.)*\")|\\s+", "$1");
+                }
 
             }
             catch (Exception ex)
